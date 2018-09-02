@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="机器学习,Logistic回归,梯度下降,最大似然估计," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -123,21 +123,17 @@
 
 
 
-<meta name="description" content="去年开始接触机器学习，看的吴恩达的视频。刚看到逻辑回归感觉挺简单，但实际上是一知半解的。今天又看了看 有了新的理解，发现跟最大似然估计有关，又发现有梯度上升的说法。本文详细解释。">
-<meta name="keywords" content="机器学习,Logistic回归,梯度下降,最大似然估计">
+<meta name="description" content="java会话管理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="逻辑回归与最大似然估计详解">
-<meta property="og:url" content="http://yoursite.com/2018/04/12/逻辑回归与最大似然估计详/index.html">
+<meta property="og:title" content="java会话管理">
+<meta property="og:url" content="http://yoursite.com/2017/08/18/java会话管理/index.html">
 <meta property="og:site_name" content="李云飞的个人博客">
-<meta property="og:description" content="去年开始接触机器学习，看的吴恩达的视频。刚看到逻辑回归感觉挺简单，但实际上是一知半解的。今天又看了看 有了新的理解，发现跟最大似然估计有关，又发现有梯度上升的说法。本文详细解释。">
+<meta property="og:description" content="java会话管理">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/images/Logistic回归-图1.png">
-<meta property="og:image" content="http://yoursite.com/images/Logistic回归-图2.png">
-<meta property="og:updated_time" content="2018-04-12T09:30:08.000Z">
+<meta property="og:updated_time" content="2018-09-02T15:13:42.307Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="逻辑回归与最大似然估计详解">
-<meta name="twitter:description" content="去年开始接触机器学习，看的吴恩达的视频。刚看到逻辑回归感觉挺简单，但实际上是一知半解的。今天又看了看 有了新的理解，发现跟最大似然估计有关，又发现有梯度上升的说法。本文详细解释。">
-<meta name="twitter:image" content="http://yoursite.com/images/Logistic回归-图1.png">
+<meta name="twitter:title" content="java会话管理">
+<meta name="twitter:description" content="java会话管理">
 
 
 
@@ -167,13 +163,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/12/逻辑回归与最大似然估计详/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/08/18/java会话管理/"/>
 
 
 
 
 
-  <title>逻辑回归与最大似然估计详解 | 李云飞的个人博客</title>
+  <title>java会话管理 | 李云飞的个人博客</title>
   
 
 
@@ -350,7 +346,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/12/逻辑回归与最大似然估计详/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/18/java会话管理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李云飞">
@@ -367,7 +363,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">逻辑回归与最大似然估计详解</h1>
+          <h1 class="post-title" itemprop="name headline">java会话管理</h1>
         
 
         <div class="post-meta">
@@ -379,8 +375,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-12T15:31:09+08:00">
-                2018-04-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T13:31:22+08:00">
+                2017-08-18
               </time>
             
 
@@ -398,9 +394,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/12/逻辑回归与最大似然估计详/#comments" itemprop="discussionUrl">
+                <a href="/2017/08/18/java会话管理/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/12/逻辑回归与最大似然估计详/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/08/18/java会话管理/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -428,18 +424,7 @@
       
 
       
-        <pre><code>去年开始接触机器学习，看的吴恩达的视频。刚看到逻辑回归感觉挺简单，但实际上是一知半解的。今天又看了看
-有了新的理解，发现跟最大似然估计有关，又发现有梯度上升的说法。本文详细解释。
-</code></pre><a id="more"></a>
-<h1 id="逻辑回归"><a href="#逻辑回归" class="headerlink" title="逻辑回归"></a>逻辑回归</h1><p>什么是逻辑回归？逻辑回归不是回归是分类，y值只有0,1两个值。线性回归不能很好的拟合时，用逻辑回归来对其进行二值分类。</p>
-<h2 id="单个训练样本"><a href="#单个训练样本" class="headerlink" title="单个训练样本"></a>单个训练样本</h2><p>先计算z值在用sigmoid函数作用于z得到概率，这个函数让y位于(0,1)这个区间内，y也就是概率<br>    z = wx + b<br>    y(预测) = a = g(z) = 1/1+exp(-z)<br>然后计算代价函数：公式不知道怎么写，只有盗图了！！！<br>    l(a,y) = -(ylog(a) + (1-y)log(1-a))<br>开始不知道这个公式怎么来的，视频说的是：<br>1.当y = 0  左边那一项等于0, 公式变为-log(1-a), a越小 代价函数的值越小, 也就是概率越接近0代价越小<br>2.当y = 1  右边那一项等于0, 公式变为-log(a), a越大 代价函数的值越小, 也就是概率越接近1代价越小</p>
-<p>计算完代价函数之后,求出对每个参数的导数，然后更新参数，用梯度下降法：<br>    参数 = 参数 - 学习率*代价函数对这个参数的导数<br>再重复上面的操作</p>
-<h2 id="多个训练样本"><a href="#多个训练样本" class="headerlink" title="多个训练样本"></a>多个训练样本</h2><p>相对于单个训练样本而言，就是把代价函数换成了：<br>    J(w) = 所有样本代价函数之和</p>
-<h1 id="最大似然估计"><a href="#最大似然估计" class="headerlink" title="最大似然估计"></a>最大似然估计</h1><p>本质是选择一组参数使得实验结果有最大的概率<br>不管是离散还是连续型分布,先写出似然函数，然后对似然函数取对数就会发现跟逻辑回归的代价函数是一样的<br>然后用梯度上升法，刚看到上升的时候有点蒙逼，就想着不是梯度下降吗？后来发现本质上是一样的只不过梯度上升是：<br>    参数 = 参数 + 学习率*log似然函数对这个参数的导数<br>再重复上面的操作</p>
-<h1 id="结合"><a href="#结合" class="headerlink" title="结合"></a>结合</h1><p>先计算z值在用sigmoid函数作用于z得到概率，这个函数让y位于(0,1)这个区间内，y也就是概率<br>    z = wx + b<br>    y(预测) = a = g(z) = 1/1+exp(-z)<br>y = 1的概率p(y=1)是g(z),y = 0的概率p(y=0)就是1-g(z)<br>把他们结合一起就是：p = g(x)的y次方*(1-g(x))的1-y次方</p>
-<p>然后写出似然函数：(m个训练样本同时发生的概率)<br><img src="/images/Logistic回归-图1.png" alt="似然函数"></p>
-<p>取对数：<br><img src="/images/Logistic回归-图2.png" alt="似然函数的对数"><br>可以看到这个式子实际上就是多个样本逻辑回归的代价函数,然后用梯度上升算法即可。</p>
-
+        <h1 id="java会话管理"><a href="#java会话管理" class="headerlink" title="java会话管理"></a>java会话管理</h1><a id="more"></a>
       
     </div>
     
@@ -483,18 +468,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
-          
-            <a href="/tags/Logistic回归/" rel="tag"># Logistic回归</a>
-          
-            <a href="/tags/梯度下降/" rel="tag"># 梯度下降</a>
-          
-            <a href="/tags/最大似然估计/" rel="tag"># 最大似然估计</a>
-          
-        </div>
-      
 
       
       
@@ -504,8 +477,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/27/ThreadLocal类原理/" rel="next" title="ThreadLocal类原理">
-                <i class="fa fa-chevron-left"></i> ThreadLocal类原理
+              <a href="/2017/08/11/python操作数据库/" rel="next" title="python操作数据库">
+                <i class="fa fa-chevron-left"></i> python操作数据库
               </a>
             
           </div>
@@ -514,8 +487,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/04/17/activemq使用详解/" rel="prev" title="ActiveMQ使用详解">
-                ActiveMQ使用详解 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/22/剑指offer-第1-10题/" rel="prev" title="剑指offer-第1-10题">
+                剑指offer-第1-10题 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -689,7 +662,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#逻辑回归"><span class="nav-number">1.</span> <span class="nav-text">逻辑回归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#单个训练样本"><span class="nav-number">1.1.</span> <span class="nav-text">单个训练样本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多个训练样本"><span class="nav-number">1.2.</span> <span class="nav-text">多个训练样本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最大似然估计"><span class="nav-number">2.</span> <span class="nav-text">最大似然估计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结合"><span class="nav-number">3.</span> <span class="nav-text">结合</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#java会话管理"><span class="nav-number">1.</span> <span class="nav-text">java会话管理</span></a></li></ol></div>
             
 
           </div>
@@ -875,9 +848,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/04/12/逻辑回归与最大似然估计详/';
-          this.page.identifier = '2018/04/12/逻辑回归与最大似然估计详/';
-          this.page.title = '逻辑回归与最大似然估计详解';
+          this.page.url = 'http://yoursite.com/2017/08/18/java会话管理/';
+          this.page.identifier = '2017/08/18/java会话管理/';
+          this.page.title = 'java会话管理';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://cloud.disqus.com/embed.js';
