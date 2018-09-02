@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python,java,算法,剑指offer," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="剑指offer第21-30题，分别用java和python解答并且有解题思路。">
+<meta name="keywords" content="python,java,算法,剑指offer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="剑指offer-第21-30题">
+<meta property="og:url" content="http://yoursite.com/2017/08/22/剑指offer-第21-30题/index.html">
+<meta property="og:site_name" content="李云飞的个人博客">
+<meta property="og:description" content="剑指offer第21-30题，分别用java和python解答并且有解题思路。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-08-22T10:06:14.318Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="剑指offer-第21-30题">
+<meta name="twitter:description" content="剑指offer第21-30题，分别用java和python解答并且有解题思路。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/22/剑指offer-第21-30题/"/>
+
+
+
+
+
+  <title>剑指offer-第21-30题 | 李云飞的个人博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?41fc030db57d5570dd22f78997dc4a7e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">李云飞的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/22/剑指offer-第21-30题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李云飞">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李云飞的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">剑指offer-第21-30题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-22T17:29:42+08:00">
+                2017-08-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/08/22/剑指offer-第21-30题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/08/22/剑指offer-第21-30题/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>剑指offer第21-30题，分别用java和python解答并且有解题思路。<br><a id="more"></a></p>
+<h1 id="第21题"><a href="#第21题" class="headerlink" title="第21题"></a>第21题</h1><p>栈的压入、弹出序列：输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否为该栈的弹出顺序。假设压入栈的所有数字均不相等。例如序列1,2,3,4,5是某栈的压入顺序，序列4，5,3,2,1是该压栈序列对应的一个弹出序列，但4,3,5,1,2就不可能是该压栈序列的弹出序列。（注意：这两个序列的长度是相等的）</p>
+<h2 id="python"><a href="#python" class="headerlink" title="python"></a>python</h2><p>思路：遍历弹出序列，对每个元素i进行如下操作：</p>
+<ol>
+<li>判断这个元素在不在压入列表吗，不在就直接返回False</li>
+<li>找出这个元素再填入序列的索引，a=0或者1就不要考虑了因为这个元素弹出后，下个弹什么都有可能。</li>
+<li>当a大于1时 遍历填入序列0到a-1，如果i的下一个元素在这之内就说明该序列不是这个压栈序列的弹出序列。返回False</li>
+<li>遍历过i之后把他在压栈序列中删除</li>
+<li>遍历结束后返回True<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">IsPopOrder</span><span class="params">(self, pushV, popV)</span>:</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(popV)):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> popV[i] <span class="keyword">in</span> pushV:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">            a= pushV.index(popV[i])</span><br><span class="line">            <span class="keyword">if</span> a&gt;<span class="number">1</span>:</span><br><span class="line">                <span class="keyword">for</span> j <span class="keyword">in</span> pushV[<span class="number">0</span>:a<span class="number">-1</span>]:</span><br><span class="line">                    <span class="keyword">if</span> popV[i+<span class="number">1</span>]==j:</span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">                pushV.remove(popV[i])</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">True</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>注意：第四步时如果不删除，入[1,2,3,4,5],出[4,5,3,2,1]这俩入栈出栈序列本来是True会错误的判断出False，因为遍历出栈序列的5时，会拿入栈序列的前三个元素和5的下个元素3作比较，因为有相等的所以返回了False，而删除4后，就是用前两个元素分别和3比较，就正确了。</p>
+</blockquote>
+<h2 id="java"><a href="#java" class="headerlink" title="java"></a>java</h2><p>思路：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<h1 id="第22题"><a href="#第22题" class="headerlink" title="第22题"></a>第22题</h1><p>从上往下打印二叉树：从上往下打印出二叉树的每个节点，同层节点从左至右打印。</p>
+<h2 id="python-1"><a href="#python-1" class="headerlink" title="python"></a>python</h2><p>思路：创建一个含有root结点的列表，开始循环，获取结点的值存到要返回的列表p，并删除结点。存在左子树就存进去列表，存在右子树也存进去。循环结束，所有的值就都在返回列表p里面了。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="comment"># 返回从上到下每个节点值列表，例：[1,2,3]</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">PrintFromTopToBottom</span><span class="params">(self, root)</span>:</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        i = <span class="number">0</span></span><br><span class="line">        p = []</span><br><span class="line">        <span class="keyword">if</span> root==<span class="keyword">None</span>:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        node_list = [root]</span><br><span class="line">        <span class="keyword">while</span> node_list:</span><br><span class="line">            t=node_list.pop(<span class="number">0</span>)</span><br><span class="line">            p.append(t.val)</span><br><span class="line">            <span class="keyword">if</span> t.left:</span><br><span class="line">                node_list.append(t.left)</span><br><span class="line">            <span class="keyword">if</span> t.right:</span><br><span class="line">                node_list.append(t.right)</span><br><span class="line">        <span class="keyword">return</span> p</span><br></pre></td></tr></table></figure></p>
+<h2 id="java-1"><a href="#java-1" class="headerlink" title="java"></a>java</h2><p>思路：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<h1 id="第23题"><a href="#第23题" class="headerlink" title="第23题"></a>第23题</h1><p>二叉搜索树的后序遍历序列：输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。如果是则输出Yes,否则输出No。假设输入的数组的任意两个数字都互不相同。</p>
+<h2 id="python-2"><a href="#python-2" class="headerlink" title="python"></a>python</h2><p>思路：先判断长度012的特殊情况，然后对于一个数组，最后一个数是根，然后从1开始遍历，如果遇到一个比跟大的数那么如果这个数的下一个比跟小就返回False，然后对左右子树执行相同操作，最后返回左右子树的返回值的交<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">VerifySquenceOfBST</span><span class="params">(self, sequence)</span>:</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        <span class="keyword">if</span> len(sequence)==<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">        <span class="keyword">if</span> len(sequence)==<span class="number">1</span> <span class="keyword">or</span> len(sequence)==<span class="number">2</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">        n = sequence[<span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line">        xiao = []</span><br><span class="line">        da = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(sequence)<span class="number">-1</span>):</span><br><span class="line">            <span class="keyword">if</span> sequence[i]&lt;n:</span><br><span class="line">                xiao.append(sequence[i])</span><br><span class="line">            <span class="keyword">elif</span> sequence[i]&gt;n:</span><br><span class="line">                da.append(sequence[i])</span><br><span class="line">                <span class="keyword">if</span> i&lt;len(sequence)<span class="number">-2</span> <span class="keyword">and</span> sequence[i+<span class="number">1</span>]&lt;n:</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">        leftIs = <span class="keyword">True</span></span><br><span class="line">        rightIs = <span class="keyword">True</span></span><br><span class="line">          </span><br><span class="line">        <span class="keyword">if</span> len(xiao) &gt; <span class="number">0</span>:</span><br><span class="line">            leftIs = self.VerifySquenceOfBST(xiao)</span><br><span class="line">        <span class="keyword">if</span> len(da) &gt; <span class="number">0</span>:</span><br><span class="line">            rightIs = self.VerifySquenceOfBST(da)</span><br><span class="line">        <span class="keyword">return</span> leftIs <span class="keyword">and</span> rightIs</span><br></pre></td></tr></table></figure></p>
+<h2 id="java-2"><a href="#java-2" class="headerlink" title="java"></a>java</h2><p>思路：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<h1 id="第24题"><a href="#第24题" class="headerlink" title="第24题"></a>第24题</h1><p>二叉树中和为某一值的路径：输入一颗二叉树和一个整数，打印出二叉树中结点值的和为输入整数的所有路径。路径定义为从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。</p>
+<h2 id="python-3"><a href="#python-3" class="headerlink" title="python"></a>python</h2><p>思路：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="comment"># 返回二维列表，内部每个列表表示找到的路径</span></span><br><span class="line">     <span class="function"><span class="keyword">def</span> <span class="title">FindPath</span><span class="params">(self, root, expectNumber)</span>:</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        <span class="keyword">if</span> root <span class="keyword">and</span> <span class="keyword">not</span> root.left <span class="keyword">and</span> <span class="keyword">not</span> root.right <span class="keyword">and</span> root.val == expectNumber:</span><br><span class="line">            <span class="keyword">return</span> [[root.val]]</span><br><span class="line">        res = []</span><br><span class="line">        left = self.FindPath(root.left, expectNumber-root.val)</span><br><span class="line">        right = self.FindPath(root.right, expectNumber-root.val)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> left+right:</span><br><span class="line">            res.append([root.val]+i)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></p>
+<p>思路：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> copy</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="comment"># 返回二维列表，内部每个列表表示找到的路径</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">FindPath</span><span class="params">(self, root, expectNumber)</span>:</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        path=[]</span><br><span class="line">        pathAll=[]</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">            <span class="keyword">return</span> pathAll</span><br><span class="line">        currentSum=<span class="number">0</span></span><br><span class="line">        self.FindPathnew(root,expectNumber,path,pathAll,currentSum)</span><br><span class="line">        <span class="keyword">return</span> pathAll</span><br><span class="line">         </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">FindPathnew</span><span class="params">(self,root,expectNumber,path,pathAll,currentSum)</span>:</span></span><br><span class="line">        path.append(root.val)</span><br><span class="line">        currentSum+=root.val</span><br><span class="line">        isLeaf=(root.left==<span class="keyword">None</span> <span class="keyword">and</span> root.right==<span class="keyword">None</span>)</span><br><span class="line">        <span class="keyword">if</span>(currentSum==expectNumber <span class="keyword">and</span> isLeaf):</span><br><span class="line">            pathAll.append(copy.deepcopy(path))</span><br><span class="line">        <span class="keyword">if</span>(root.left != <span class="keyword">None</span>):</span><br><span class="line">            self.FindPathnew(root.left,expectNumber,path,pathAll,currentSum)</span><br><span class="line">        <span class="keyword">if</span>(root.right != <span class="keyword">None</span>):</span><br><span class="line">            self.FindPathnew(root.right,expectNumber,path,pathAll,currentSum)</span><br><span class="line">        path.pop()</span><br></pre></td></tr></table></figure></p>
+<h2 id="java-3"><a href="#java-3" class="headerlink" title="java"></a>java</h2><p>思路：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<h1 id="第25题"><a href="#第25题" class="headerlink" title="第25题"></a>第25题</h1><p>复杂链表的复制：输入一个复杂链表（每个节点中有节点值，以及两个指针，一个指向下一个节点，另一个特殊指针指向任意一个节点），返回结果为复制后复杂链表的head。（注意，输出结果中请不要返回参数中的节点引用，否则判题程序会直接返回空）</p>
+<h2 id="python-4"><a href="#python-4" class="headerlink" title="python"></a>python</h2><p>思路：</p>
+<ol>
+<li>复制每个节点，如：复制节点A得到A1，将A1插入节点A后面</li>
+<li>遍历链表，A1-&gt;random = A-&gt;random-&gt;next;</li>
+<li>将链表拆分成原链表和复制后的链表<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="comment"># 返回 RandomListNode</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">Clone</span><span class="params">(self, pHead)</span>:</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> pHead:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">None</span></span><br><span class="line">        <span class="comment"># 1、复制每个节点，如：复制节点A得到A1，将A1插入节点A后面</span></span><br><span class="line">        start = pHead</span><br><span class="line">        <span class="keyword">while</span> start:</span><br><span class="line">            a=RandomListNode(start.label) </span><br><span class="line">            a.next = start.next</span><br><span class="line">            start.next=a</span><br><span class="line">            start = a.next</span><br><span class="line">        <span class="comment"># 2、遍历链表，A1-&gt;random = A-&gt;random-&gt;next;   </span></span><br><span class="line">        start = pHead</span><br><span class="line">        <span class="keyword">while</span> start:</span><br><span class="line">            temp = start.next</span><br><span class="line">            <span class="keyword">if</span> start.random: </span><br><span class="line">                temp.random = start.random.next</span><br><span class="line">            start = temp.next</span><br><span class="line">        <span class="comment"># 3、将链表拆分成原链表和复制后的链表  </span></span><br><span class="line">        start = pHead</span><br><span class="line">        res = pHead.next</span><br><span class="line">        <span class="keyword">while</span> start.next:</span><br><span class="line">            tmp = start.next</span><br><span class="line">            start.next = tmp.next</span><br><span class="line">            start = tmp</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="java-4"><a href="#java-4" class="headerlink" title="java"></a>java</h2><p>思路：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">start = start.next</span><br><span class="line">            cur.next = cur.next.next</span><br><span class="line">            cur = cur.next</span><br><span class="line">            start = start.next.next</span><br></pre></td></tr></table></figure></p>
+<h1 id="第26题"><a href="#第26题" class="headerlink" title="第26题"></a>第26题</h1><p>二叉搜索树与双向链表：输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的双向链表。要求不能创建任何新的结点，只能调整树中结点指针的指向。</p>
+<h2 id="python-5"><a href="#python-5" class="headerlink" title="python"></a>python</h2><p>思路：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">Convert</span><span class="params">(self, pRootOfTree)</span>:</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        res = self.NodeList(pRootOfTree)</span><br><span class="line">        <span class="keyword">if</span> len(res) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">None</span></span><br><span class="line">        <span class="keyword">if</span> len(res) == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> pRootOfTree</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(res)<span class="number">-1</span>):</span><br><span class="line">            res[i].right = res[i+<span class="number">1</span>]</span><br><span class="line">            res[i+<span class="number">1</span>].left = res[i]</span><br><span class="line">        <span class="keyword">return</span> res[<span class="number">0</span>]</span><br><span class="line">        </span><br><span class="line">            </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">NodeList</span><span class="params">(self,pRootOfTree)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> pRootOfTree:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        <span class="keyword">return</span> self.NodeList(pRootOfTree.left) + [pRootOfTree] + self.NodeList(pRootOfTree.right)</span><br></pre></td></tr></table></figure></p>
+<h2 id="java-5"><a href="#java-5" class="headerlink" title="java"></a>java</h2><p>思路：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<h1 id="第27题"><a href="#第27题" class="headerlink" title="第27题"></a>第27题</h1><p>字符串的排列：输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。</p>
+<h2 id="python-6"><a href="#python-6" class="headerlink" title="python"></a>python</h2><p>思路：ord(‘a’)==97    0-255    chr(100)==’d’<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">Permutation</span><span class="params">(self, ss)</span>:</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> ss:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        <span class="keyword">return</span> sorted(list(set(map(<span class="string">''</span>.join, itertools.permutations(ss)))))</span><br></pre></td></tr></table></figure></p>
+<h2 id="java-6"><a href="#java-6" class="headerlink" title="java"></a>java</h2><p>思路：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<h1 id="第28题"><a href="#第28题" class="headerlink" title="第28题"></a>第28题</h1><p>数组中出现次数超过一半的数字：数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。如果不存在则输出0。</p>
+<h2 id="python-7"><a href="#python-7" class="headerlink" title="python"></a>python</h2><p>思路：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">MoreThanHalfNum_Solution</span><span class="params">(self, numbers)</span>:</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> numbers:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        number = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> numbers:</span><br><span class="line">            <span class="keyword">if</span> len(numbers)/<span class="number">2</span> &lt; numbers.count(i):</span><br><span class="line">                number = i</span><br><span class="line">        <span class="keyword">return</span> number</span><br></pre></td></tr></table></figure></p>
+<p>思路：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">MoreThanHalfNum_Solution</span><span class="params">(self, numbers)</span>:</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> numbers:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            token = &#123;&#125;</span><br><span class="line">            <span class="keyword">for</span> x <span class="keyword">in</span> numbers:</span><br><span class="line">                <span class="keyword">if</span> x <span class="keyword">in</span> token:</span><br><span class="line">                    token[x] += <span class="number">1</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    token[x] = <span class="number">1</span></span><br><span class="line">            half_n = len(numbers) / <span class="number">2.0</span></span><br><span class="line">            <span class="keyword">for</span> (x, n) <span class="keyword">in</span> token.items():</span><br><span class="line">                <span class="keyword">if</span> n &gt; half_n:</span><br><span class="line">                    <span class="keyword">return</span> x</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="java-7"><a href="#java-7" class="headerlink" title="java"></a>java</h2><p>思路：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<h1 id="第29题"><a href="#第29题" class="headerlink" title="第29题"></a>第29题</h1><p>最小的K个数：输入n个整数，找出其中最小的K个数。例如输入4,5,1,6,2,7,3,8这8个数字，则最小的4个数字是1,2,3,4。</p>
+<h2 id="python-8"><a href="#python-8" class="headerlink" title="python"></a>python</h2><p>思路：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">GetLeastNumbers_Solution</span><span class="params">(self, tinput, k)</span>:</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        <span class="keyword">if</span> k&gt;len(tinput):</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        tinput.sort()</span><br><span class="line">        <span class="keyword">return</span> tinput[:k]</span><br></pre></td></tr></table></figure></p>
+<p>思路：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">GetLeastNumbers_Solution</span><span class="params">(self, tinput, k)</span>:</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        <span class="keyword">if</span> k&gt;len(tinput):</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(len(tinput)<span class="number">-1</span>,i,<span class="number">-1</span>):</span><br><span class="line">                <span class="keyword">if</span> tinput[j]&lt;tinput[j<span class="number">-1</span>]:</span><br><span class="line">                    tinput[j],tinput[j<span class="number">-1</span>] = tinput[j<span class="number">-1</span>],tinput[j]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> tinput[:k]</span><br></pre></td></tr></table></figure></p>
+<h2 id="java-8"><a href="#java-8" class="headerlink" title="java"></a>java</h2><p>思路：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<h1 id="第30题"><a href="#第30题" class="headerlink" title="第30题"></a>第30题</h1><p>连续子数组的最大和：HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天测试组开完会后,他又发话了:在古老的一维模式识别中,常常需要计算连续子向量的最大和,当向量全为正数的时候,问题很好解决。但是,如果向量中包含负数,是否应该包含某个负数,并期望旁边的正数会弥补它呢？例如:{6,-3,-2,7,-15,1,2,2},连续子向量的最大和为8(从第0个开始,到第3个为止)。你会不会被他忽悠住？(子向量的长度至少是1)</p>
+<h2 id="python-9"><a href="#python-9" class="headerlink" title="python"></a>python</h2><p>思路：暴力<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">FindGreatestSumOfSubArray</span><span class="params">(self, array)</span>:</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        max = array[<span class="number">0</span>]</span><br><span class="line">        sum = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(array)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i+<span class="number">1</span>,len(array)+<span class="number">1</span>):</span><br><span class="line">                <span class="keyword">for</span> k <span class="keyword">in</span> range(i,j):</span><br><span class="line">                    sum = sum+array[k]</span><br><span class="line">                <span class="keyword">if</span> sum&gt;max:</span><br><span class="line">                    max=sum</span><br><span class="line">                sum = <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> max</span><br></pre></td></tr></table></figure></p>
+<p>思路：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">FindGreatestSumOfSubArray</span><span class="params">(self, array)</span>:</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        max_sum, cur_sum = <span class="number">-0xffffff</span>, <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> array:</span><br><span class="line">            <span class="keyword">if</span> cur_sum &lt;= <span class="number">0</span>:</span><br><span class="line">                cur_sum = i</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                cur_sum += i</span><br><span class="line">            <span class="keyword">if</span> cur_sum &gt; max_sum:</span><br><span class="line">                max_sum = cur_sum</span><br><span class="line">        <span class="keyword">return</span> max_sum</span><br></pre></td></tr></table></figure></p>
+<h2 id="java-9"><a href="#java-9" class="headerlink" title="java"></a>java</h2><p>思路：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">啊啊啊</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="李云飞 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="李云飞 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/剑指offer/" rel="tag"># 剑指offer</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/22/剑指offer-第11-20题/" rel="next" title="剑指offer-第11-20题">
+                <i class="fa fa-chevron-left"></i> 剑指offer-第11-20题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/22/剑指offer-第31-40题/" rel="prev" title="剑指offer-第31-40题">
+                剑指offer-第31-40题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/touxiang.jpg"
+                alt="李云飞" />
+            
+              <p class="site-author-name" itemprop="name">李云飞</p>
+              <p class="site-description motion-element" itemprop="description">it相关的学习笔记</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yungegege" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5482253251/home" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-globe"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/wo-shi-ni-yun-ge-90/activities" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.liaoxuefeng.com/" title="Title" target="_blank">Title</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第21题"><span class="nav-number">1.</span> <span class="nav-text">第21题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#python"><span class="nav-number">1.1.</span> <span class="nav-text">python</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java"><span class="nav-number">1.2.</span> <span class="nav-text">java</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第22题"><span class="nav-number">2.</span> <span class="nav-text">第22题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#python-1"><span class="nav-number">2.1.</span> <span class="nav-text">python</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java-1"><span class="nav-number">2.2.</span> <span class="nav-text">java</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第23题"><span class="nav-number">3.</span> <span class="nav-text">第23题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#python-2"><span class="nav-number">3.1.</span> <span class="nav-text">python</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java-2"><span class="nav-number">3.2.</span> <span class="nav-text">java</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第24题"><span class="nav-number">4.</span> <span class="nav-text">第24题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#python-3"><span class="nav-number">4.1.</span> <span class="nav-text">python</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java-3"><span class="nav-number">4.2.</span> <span class="nav-text">java</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第25题"><span class="nav-number">5.</span> <span class="nav-text">第25题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#python-4"><span class="nav-number">5.1.</span> <span class="nav-text">python</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java-4"><span class="nav-number">5.2.</span> <span class="nav-text">java</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第26题"><span class="nav-number">6.</span> <span class="nav-text">第26题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#python-5"><span class="nav-number">6.1.</span> <span class="nav-text">python</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java-5"><span class="nav-number">6.2.</span> <span class="nav-text">java</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第27题"><span class="nav-number">7.</span> <span class="nav-text">第27题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#python-6"><span class="nav-number">7.1.</span> <span class="nav-text">python</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java-6"><span class="nav-number">7.2.</span> <span class="nav-text">java</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第28题"><span class="nav-number">8.</span> <span class="nav-text">第28题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#python-7"><span class="nav-number">8.1.</span> <span class="nav-text">python</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java-7"><span class="nav-number">8.2.</span> <span class="nav-text">java</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第29题"><span class="nav-number">9.</span> <span class="nav-text">第29题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#python-8"><span class="nav-number">9.1.</span> <span class="nav-text">python</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java-8"><span class="nav-number">9.2.</span> <span class="nav-text">java</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第30题"><span class="nav-number">10.</span> <span class="nav-text">第30题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#python-9"><span class="nav-number">10.1.</span> <span class="nav-text">python</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java-9"><span class="nav-number">10.2.</span> <span class="nav-text">java</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李云飞</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=65635224";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://cloud.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/08/22/剑指offer-第21-30题/';
+          this.page.identifier = '2017/08/22/剑指offer-第21-30题/';
+          this.page.title = '剑指offer-第21-30题';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://cloud.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

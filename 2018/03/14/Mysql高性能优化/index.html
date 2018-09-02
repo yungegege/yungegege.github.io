@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="mysql," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="mysql高性能优化">
+<meta name="keywords" content="mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql高性能优化">
+<meta property="og:url" content="http://yoursite.com/2018/03/14/Mysql高性能优化/index.html">
+<meta property="og:site_name" content="李云飞的个人博客">
+<meta property="og:description" content="mysql高性能优化">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-02T03:42:36.321Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mysql高性能优化">
+<meta name="twitter:description" content="mysql高性能优化">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/14/Mysql高性能优化/"/>
+
+
+
+
+
+  <title>Mysql高性能优化 | 李云飞的个人博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?41fc030db57d5570dd22f78997dc4a7e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">李云飞的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/14/Mysql高性能优化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李云飞">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李云飞的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Mysql高性能优化</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-14T19:28:46+08:00">
+                2018-03-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/14/Mysql高性能优化/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/03/14/Mysql高性能优化/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="mysql高性能优化"><a href="#mysql高性能优化" class="headerlink" title="mysql高性能优化"></a>mysql高性能优化</h1><a id="more"></a>
+<h2 id="表的优化"><a href="#表的优化" class="headerlink" title="表的优化"></a>表的优化</h2><ol>
+<li>定长和变长分离<br>int、char这些定长的字段宜放在一张表，varchar、text、blog这些变长字段适合单独放，用主键与核心表关联起来。</li>
+<li>常用字段和不常用字段分离</li>
+<li>一对多，需要关联统计的字段上加冗余字段<br>如用户表和文章表，一个用户发多个文章。可以在用户表加个文章个数的字段，查询用户发文章数量时候直接取。</li>
+</ol>
+<h2 id="列类型的选择原则"><a href="#列类型的选择原则" class="headerlink" title="列类型的选择原则"></a>列类型的选择原则</h2><p>整型&gt;data,time&gt;enum,char&gt;varchar&gt;blob,text<br>够用就行，大的字段浪费内存影响速度。</p>
+<h2 id="索引优化"><a href="#索引优化" class="headerlink" title="索引优化"></a>索引优化</h2><p>理想的索引应该是查询频繁、区分度高、长度小、尽可能覆盖常用查询字段。</p>
+<ul>
+<li>若在性别上建立索引，区分度就低。</li>
+<li>若针对列中的值从左到右截取部分来建索引：长度长了增删改变慢，并影响查询速度，但长度越长区分度越高，所以要在长度与区分度两者间取得一个平衡。<br>伪哈希技巧：若列的前一半重复度较高如：<a href="https://www.baidu.com，可以倒序过来建立索引，也可以通过哈希算法把字符串算成32位整数，这么办就可以增加区分度，长度也不用太长。" target="_blank" rel="noopener">https://www.baidu.com，可以倒序过来建立索引，也可以通过哈希算法把字符串算成32位整数，这么办就可以增加区分度，长度也不用太长。</a><h3 id="btree索引"><a href="#btree索引" class="headerlink" title="btree索引"></a>btree索引</h3>innodb和Myisam默认用的btree索引。<br>常见误区：<br>例:where id=1 and age=2  //查询id为1，age为2的学生<br>在id和age上分别建索引<br>因为是独立的索引，只能用上一个。想用到两个必须建多列索引</li>
+</ul>
+<p>建立多列索引需要考虑列的查询效率，列的区分度，列的查询顺序。多列索引想要都发挥作用必须满足左前缀原则。<br>例:index(a,b,c)<br>where a=3 and c=4 and b=5   a,b,c都能用到索引，mysql引擎对于and会自动优化顺序，相当于a=3 and b=4 and c=5<br>where a=3 and b&gt;4 and 5       a,b能用到索引，b不行<br>where a=3 and b like ‘xxx%’ and c=5  a能用，b能用一部分，c不行 也是因为中间断了<br>where a=3 and b like ‘%xxx’ and c=5  a能用，b不行，c不行     因为a和b之间已经断了<br>where a=3 and c=5 a可以用到索引，c不行，中间断了</p>
+<h3 id="hash索引"><a href="#hash索引" class="headerlink" title="hash索引"></a>hash索引</h3><p>在memory(内存)表里，理论查询时间复杂度为O(1)<br>但为什么查找如此高效，不都用hash索引？</p>
+<ul>
+<li>hash函数计算结果是随机的，在磁盘上随机放置</li>
+<li>无法为范围查询进行优化</li>
+<li>无法利用前缀索引</li>
+<li>排序无法优化</li>
+<li>必须回行，通过索引拿到数据位置，必须回到表中取数据</li>
+</ul>
+<h3 id="聚簇索引"><a href="#聚簇索引" class="headerlink" title="聚簇索引"></a>聚簇索引</h3><p>innodb是聚簇索引，聚簇索引就是把数据放在主键索引节点下。、<br>主键的索引结构中，即存有主键值，又存储了行数据，当找到主键的某个叶子节点就能找到数据，不用在回行找数据了。<br>次级索引(非主键的索引)指向对主键的引用，次级索引会存主键的地址值。先找到主键的地址，再找到行数据。<br>对innodb来说如果建表没指定主键，会帮忙造个主键。</p>
+<p>聚簇索引的优势：通过主键索引查询数据不用回行。<br>聚簇索引的劣势：如果碰到不规则数据插入时，容易造成频繁的叶分裂，因为索引与数据都要移动。</p>
+<h3 id="非聚簇索引"><a href="#非聚簇索引" class="headerlink" title="非聚簇索引"></a>非聚簇索引</h3><p>Myisam是非聚簇索引，非聚簇索引就是把索引和数据分离，索引指向行在磁盘上的位置。<br>无论是通过主键索引还是次级索引查找数据都需要回行。<br>例: create table A{<br>    id varchar(64) primary key,<br>    ver int,<br>    …<br>}<br>在 id,ver上有联合索引，10000条数据，表里有几个很长的字段 text(3000)<br>为什么select id from A order by id 特别慢?<br>而select id from A order by id,ver非常快？<br>明明id可以用到索引覆盖的效果，而前者慢后者快？</p>
+<p>从这个问题可以推断出用的是innodb引擎，id是主键与叶子在一棵树上，而叶子过大，所以查询很慢。<br>而id与ver的联合索引是单独的索引树，上面没有叶子，查到数据的速度很快。<br>如果是Myisam引擎就不会出现这种情况，即使id是主键也与叶子不在一棵树上，只用id索引查询速度依旧很快。</p>
+<h3 id="索引覆盖"><a href="#索引覆盖" class="headerlink" title="索引覆盖"></a>索引覆盖</h3><p>即查询的数据就是索引的一部分。<br>把要查询到数据列建立联合索引，查的时候不用回行，直接在索引树里就能找到数据。<br>例: index(id,name)<br>select name from table where id=2       就不用回行查找数据，速度很快</p>
+<h3 id="索引与排序"><a href="#索引与排序" class="headerlink" title="索引与排序"></a>索引与排序</h3><p>排序可能发生2种情况：</p>
+<ol>
+<li>对于覆盖索引，直接在索引上查询时，就是有顺序的，using index，在innodb引擎中，沿着索引字段排序，也是自然有序的；对于myisea引擎，如果按某索引字段排序，如id，但取出的字段中有未索引字段，如name，myisam的做法不是索引-回行，而是先取出所有行再进行排序。</li>
+<li>先取出数据，形成临时表做filesort(文件排序，但文件可能在磁盘上也可能在内存中)<br>所以要尽量保证取出来的数据本身就是有序的，即利用索引来排序。</li>
+</ol>
+<p>对于myisam引擎或者innodb引擎(未用到主键索引)：<br>如果排序的是所有行(没有where)，或者where条件和group不是一个字段都会用到filesort。<br>例: number 与 length 是单独的索引<br>where number&gt;10 order by number    不会用到filesort,取数据的时候就是排好序了的,没有经历排序。<br>而 直接order by number  或者 where length&gt;10 order by number   会用到filesort</p>
+<p>例：商品表goods，(cat_id,shop_price)组成联合索引<br>where cat_id=n order by shop_price 不会用到filesort,可以利用索引来排序<br>where cat_id&gt;n order by cat_id 不会用到filesort,可以利用索引来排序</p>
+<h3 id="重复索引与冗余索引"><a href="#重复索引与冗余索引" class="headerlink" title="重复索引与冗余索引"></a>重复索引与冗余索引</h3><p>重复索引：指在一个列中或者顺序相同的几个列中建立了多个索引，没有任何帮助，只会增大索引文件拖慢更新速度。<br>冗余索引：指2个索引所包含的列有重叠，但顺序不完全相同<br>例：index(id,age)与(age,id)这两个索引的列相同但顺序不同，<br>select name from table where id=1;<br>select id from table where name=”啊啊啊”;<br>查询数据速度极快，能用到索引覆盖，直接在索引树中可以查到数据。</p>
+<h3 id="索引碎片与维护"><a href="#索引碎片与维护" class="headerlink" title="索引碎片与维护"></a>索引碎片与维护</h3><p>在数据变化中产生的碎片可以通过以下方法修复：<br>alter table xxx ENGINE innodeb<br>optimize table xxx<br>修复表的数据及索引碎片就会把所有的数据文件重新整理一遍使之对其，这个过程如果表的行数比较大也是非常耗费资源的操作，所以不能频繁的修复。</p>
+<h2 id="sql语句优化"><a href="#sql语句优化" class="headerlink" title="sql语句优化"></a>sql语句优化</h2><p>切分查询：数据分多次查<br>分解查询：夺标链接分为几个简单sql</p>
+<h2 id="limit优化"><a href="#limit优化" class="headerlink" title="limit优化"></a>limit优化</h2><p>查询时涉及到分页操作时，若翻得页数过多，即：limit a,b 其中a过大<br>那么查询速度会很慢，因为不是从a开始查，而是从第一条数据开始查，查到需要的几条数据之后丢弃之前的。<br>例：查询第10001页的10条数据时，若id是从连续的，可以这么解决：<br>select * from users where id&gt;100000 limit 10<br>或者 select id from user limit 100001,10  查询到id后再通过id查数据</p>
+<h2 id="强制使用索引"><a href="#强制使用索引" class="headerlink" title="强制使用索引"></a>强制使用索引</h2><p>select min(id) from area where pid=69;   这句age就用不到索引<br>select id from area where pid=69 limit 1;  无法保证第一个是最小的，<br>select id from area use index(primary)  where pid=69 limit 1;     这个时候可以强制使用索引，查到的第一个必定是最小的</p>
+<h2 id="in型子查询"><a href="#in型子查询" class="headerlink" title="in型子查询"></a>in型子查询</h2><p>例：select * from goods where cat_id in (select cat_id from category where parent_id=6)<br>并不是先查6号栏目的子栏目id，再从子栏目id得到数据<br>而是被mysql查询优化器优化为：先对goods表全表扫描，再逐行对照看parent_id是否为6</p>
+<p>改进：用连接查询代替子查询<br>select goods_id,goods_name,tmp.cat_id from goods<br>inner jion (select cat_id from category where parent_id=6) ad tmp<br>on goods.cat_id tmp.cat_id<br>第三行可以改为using cat_id 表示用cat_id来关联。</p>
+<h2 id="count与union"><a href="#count与union" class="headerlink" title="count与union"></a>count与union</h2><p>若表中的数据巨多，当查询数据总量时<br>select count(*) from table&gt;10 的查询速度很慢<br>可以改为 (select count(*) from table )-(select count(*) from table&lt;=10)<br>就能加快查询速度！</p>
+<h2 id="explain各字段解析"><a href="#explain各字段解析" class="headerlink" title="explain各字段解析"></a>explain各字段解析</h2><h3 id="id"><a href="#id" class="headerlink" title="id"></a>id</h3><p>select查询的序列号，当引用其他查询结果做union时，该值为null，且table列的值为union（m,n），意思是把id为m和n的查询结果做union。</p>
+<h3 id="select-type"><a href="#select-type" class="headerlink" title="select_type"></a>select_type</h3><p>select查询的类型，主要是区别普通查询和联合查询、子查询之类的复杂查询。<br>simple：简单查询，查询中不包含子查询或者union。<br>primary：查询中若包含复杂的子部分，则最外层查询为primary。<br>union：若第二个select出现在union之后，则被标记为union，如果有多个union，则除第一个select之外，后续的都是union。<br>dependent union：在union中的第二个及以后的查询语句，依赖于外层查询。（关联查询？）<br>union result：union的结果，id列为null，table列显示了是由哪几个查询的结果做的union。<br>subquery：子查询中的第一个查询。（第二个及以后的呢？）<br>dependent query：子查询中的第一个查询，依赖于外部查询。（关联子查询？）<br>derived：衍生查询（from子句中的子查询）？？？<br>materialized：物化子查询？什么意思？<br>uncacheable subquery：查询结果不能缓存的子查询，对于外部查询中的每一行都必须重新计算。<br>uncacheable union：该查询是union查询中的第二个及以后的查询语句，且整个union查询语句是一个uncacheable subquery。</p>
+<p>关于dependent subquery和uncacheable subquery，官方文档是这样解释的：</p>
+<p>DEPENDENT SUBQUERY evaluation differs from UNCACHEABLE SUBQUERY evaluation. For DEPENDENT SUBQUERY, the subquery is re-evaluated only once for each set of different values of the variables from its outer context. For UNCACHEABLE SUBQUERY, the subquery is re-evaluated for each row of the outer context.</p>
+<p>翻译如下：<br>dependent subquery评估和uncacheable subquery评估不同。dependent subquery对于外部查询中的不同的值只计算一次。而uncacheable subquery对于外部查询中的每一行都重新评估一次。<br>（由此可见两者的执行效率完全不同，极端情况下能差好几个数量级）</p>
+<h3 id="table"><a href="#table" class="headerlink" title="table"></a>table</h3><p>查询结果出自哪张表。可以是具体的表名，也可以是以下的值：<br>union M，N：id为M和N的查询结果做union<br>derivedN：参考id为N的查询的衍生查询<br>subqueryN：参考id为N的物化子查询</p>
+<h3 id="type"><a href="#type" class="headerlink" title="type"></a>type</h3><p>表连接类型，访问方式。<br>type显示的是访问类型，是较为重要的一个指标，结果值从好到坏依次是：<br>system &gt; const &gt; eq_ref &gt; ref &gt; fulltext &gt; ref_or_null &gt; index_merge &gt; unique_subquery &gt; index_subquery &gt; range &gt; index &gt; ALL<br>一般来说，得保证查询至少达到range级别，最好能达到ref。</p>
+<p>以下按照从好到坏的顺序介绍访问类型：</p>
+<p>system：表中只有一行数据（=system table），是const类型的特殊情况。<br>const：表中最多只有一行符合条件的行，该行在查询一开始就会被读取。因为只有一行，所以优化器可以把这一值看做常数。const连接类型速度非常快，因为只读取一次。经常用在在主键或者唯一索引上做等值查询。在如下的查询中，tb1_name可以当做const表。<br>SELECT * FROM tbl_name WHERE primary_key=1;</p>
+<p>SELECT * FROM tbl_name<br>WHERE primary_key_part1=1 AND primary_key_part2=2;</p>
+<p>eq_ref：可以理解为利用主键或者唯一非空索引做等值唯一连接。从表里取出一行来，与从之前的表里取出的行做连接。不同于system和const，这个是最常用的连接方式。这是用在索引的全部都用来做连接，并且该索引为主键或唯一非空索引时。eq_ref用在索引列做等值连接。与之相比较的值可以是常数，或者与之前表的列有关的表达式。在如下的查询中，mysql使用eq_ref连接来处理ref_table：<br>SELECT * FROM ref_table,other_table<br>WHERE ref_table.key_column=other_table.column;</p>
+<p>SELECT * FROM ref_table,other_table<br>WHERE ref_table.key_column_part1=other_table.column<br>AND ref_table.key_column_part2=1;</p>
+<h3 id="ref：可以理解为非唯一性索引扫描。从索引中将对应值的行取出来，跟之前表中取出的数据做连接。如果只使用了索引的左前缀，或者非主键非唯一索引做链接时，用ref。（换句话说，对于给定的值，返回的行数不止一行。）如果给定的值只返回很少的行，这是个很好的连接方式。"><a href="#ref：可以理解为非唯一性索引扫描。从索引中将对应值的行取出来，跟之前表中取出的数据做连接。如果只使用了索引的左前缀，或者非主键非唯一索引做链接时，用ref。（换句话说，对于给定的值，返回的行数不止一行。）如果给定的值只返回很少的行，这是个很好的连接方式。" class="headerlink" title="ref：可以理解为非唯一性索引扫描。从索引中将对应值的行取出来，跟之前表中取出的数据做连接。如果只使用了索引的左前缀，或者非主键非唯一索引做链接时，用ref。（换句话说，对于给定的值，返回的行数不止一行。）如果给定的值只返回很少的行，这是个很好的连接方式。"></a>ref：可以理解为非唯一性索引扫描。从索引中将对应值的行取出来，跟之前表中取出的数据做连接。如果只使用了索引的左前缀，或者非主键非唯一索引做链接时，用ref。（换句话说，对于给定的值，返回的行数不止一行。）如果给定的值只返回很少的行，这是个很好的连接方式。</h3><p>ref可以用于在索引列上做=或&gt;=,&lt;=操作时。在下面的例子中，mysql使用ref连接方式处理ref_table：<br>SELECT * FROM ref_table WHERE key_column=expr;</p>
+<p>SELECT * FROM ref_table,other_table<br>WHERE ref_table.key_column=other_table.column;</p>
+<p>SELECT <em> FROM ref_table,other_table<br>WHERE ref_table.key_column_part1=other_table.column<br>AND ref_table.key_column_part2=1;<br>fulltext：全文索引。<br>ref_or_null：连接方式跟ref相似，但是增加了一个额外的搜索条件，包含null值。这种连接方式优化大多用于解决子查询问题。在下面的例子中，mysql使用ref_or_null连接方式处理ref_table：<br>SELECT </em> FROM ref_table<br>WHERE key_column=expr OR key_column IS NULL;<br>index merge：这种连接方式表明使用了index merge优化。在这种情况下，explain输出的列中，key列包含用到的索引的列表，key_len列包含用到的列的最大长度的列表。see Section 8.2.1.4, “Index Merge Optimization”.<br>unique_subquery：这种方式用于在使用in关键字进行子查询时，代替ref连接方式。<br>unique_subquery是一个索引查询方法，用来代替子查询以提供更好的效率。<br>用于类似如下查询方式：<br>…… value IN (SELECT primary_key FROM single_table WHERE some_expr)<br>index_subquery：这种连接方式类似于unique_subquery，代替了IN方式的子查询，但是用于非唯一索引的子查询。用于类似如下查询方式：<br>……value IN (SELECT key_column FROM single_table WHERE some_expr)<br>range：索引范围查询。利用索引查询，返回给定范围内的行。在explain的输出中，key列显示使用了哪个索引，key_len列显示使用到的列的最长部分，在这种情况下，ref列为null。<br>range用于key列与常数作比较，操作符可以是 =, &lt;&gt;, &gt;, &gt;=, &lt;, &lt;=, IS NULL, &lt;=&gt;, BETWEEN, 或者 IN()，例如：<br>SELECT * FROM tbl_name<br>WHERE key_column = 10;</p>
+<p>SELECT * FROM tbl_name<br>WHERE key_column BETWEEN 10 and 20;</p>
+<p>SELECT * FROM tbl_name<br>WHERE key_column IN (10,20,30);</p>
+<p>SELECT * FROM tbl_name<br>WHERE key_part1 = 10 AND key_part2 IN (10,20,30);</p>
+<p>index：index: 连接类型跟 all 一样，不同的是它只扫描索引树。<br>有两种情况：<br>（1）如果索引是覆盖索引，所有需要的数据都可以从索引中获得，此时只扫描索引。在这种情况下，explain命令的输出中，Extra列显示 Using index。它通常会比 all快点，因为索引文件通常比数据文件小。<br>（2）通过查询索引，以索引的排列顺序做全表扫描。在这种情况下，Extra列不会显示using index。<br>all：全表扫描。</p>
+<h3 id="possible-keys"><a href="#possible-keys" class="headerlink" title="possible_keys"></a>possible_keys</h3><p>指 mysql在搜索表记录时可能使用哪个索引。<br>possible_keys里面所包含的索引可能在实际的使用中没用到。如果这个字段的值是null，就表示没有索引被用到。<br>这种情况下，就可以检查 where子句中哪些字段那些字段适合增加索引以提高查询的性能。</p>
+<h3 id="key"><a href="#key" class="headerlink" title="key"></a>key</h3><p>key字段显示了mysql实际上要用的索引。<br>当没有任何索引被用到的时候，这个字段的值就是null。<br>想要让mysql强行使用或者忽略在 possible_keys字段中的索引列表，可以在查询语句中使用关键字force index, use index,或 ignore index。<br>如果是 myisam 和 bdb 类型表，可以使用 analyzetable 来帮助分析使用使用哪个索引更好。<br>如果是 myisam类型表，运行命令 myisamchk –analyze也是一样的效果。<br>详细的可以查看章节”14.5.2.1 analyze tablesyntax”和”5.7.2 table maintenance and crash recovery”。</p>
+<h3 id="key-len"><a href="#key-len" class="headerlink" title="key_len"></a>key_len</h3><p>显示MySQL决定使用的键长度。表示索引中使用的字节数，可通过该列计算查询中使用的索引的长度。如果键是NULL，长度就是NULL。文档提示特别注意这个值可以得出一个多重主键里mysql实际使用了哪一部分。可以告诉你在联合索引中mysql会真正使用了哪些索引。<br>注：key_len显示的值为索引字段的最大可能长度，并非实际使用长度，即key_len是根据表定义计算而得，不是通过表内检索出的。</p>
+<h3 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h3><p>ref 字段显示了哪些字段或者常量被用来和 key配合从表中查询记录出来。</p>
+<h3 id="rows"><a href="#rows" class="headerlink" title="rows"></a>rows</h3><p>rows 字段显示了mysql认为在查询中应该检索的记录数。 表示MySQL根据表统计信息及索引选用情况，估算的找到所需的记录所需要读取的行数，在innodb上可能是不准确的。</p>
+<h3 id="Extra"><a href="#Extra" class="headerlink" title="Extra"></a>Extra</h3><p>extra列包含了mysql处理sql的一些附加信息。<br>如果你想让查询速度尽可能的快，那么就要注意Extra列中值为using filesort和using temporary。</p>
+<p>Child of ‘table’ pushed join@1<br>仅适用于mysql cluster。在NDB内核中，该表被当做子表，查询条件下推（push down）到各个节点处理，避免节点间不符合条件的数据的交互，减少网络和系统负载。（我这么认为的）<br>const row not found<br>在类似于SELECT … FROM tbl_name 这样的查询中，被查询的表是空表。<br>Deleting all rows<br>某些引擎（例如myisam）在删除全部数据的时候，支持handle method，简单快速的删除所有数据。如果引擎使用了这种方式优化，则extra列显示此信息。<br>distinct<br>mysql当找到当前记录的匹配联合结果的第一条记录之后，就不再搜索其他记录了。<br>FirstMatch(tbl_name)<br>Full scan on NULL key<br>Impossible HAVING<br>Impossible WHERE<br>Impossible WHERE noticed after reading const tables<br>LooseScan(m..n)<br>Materialize, Scan<br>No matching min/max row<br>no matching row in const table<br>No matching rows after partition pruning<br>No tables used<br>Not exists<br>mysql在查询时做一个 left join优化时，当它在当前表中找到了和前一条记录符合 left join条件后，就不再搜索更多的记录了。下面是一个这种类型的查询例子：<br>select * from t1 left join t2 on t1.id=t2.id where t2.id isnull;<br>假使 t2.id 定义为 not null。这种情况下，mysql将会扫描表 t1并且用 t1.id 的值在 t2 中查找记录。当在 t2中找到一条匹配的记录时，这就意味着 t2.id 肯定不会都是null，就不会再在 t2 中查找相同 id值的其他记录了。也可以这么说，对于 t1 中的每个记录，mysql只需要在t2 中做一次查找，而不管在 t2 中实际有多少匹配的记录。<br>Range checked for each record (index map: N)<br>mysql没找到合适的可用的索引。取代的办法是，对于前一个表的每一个行连接，它会做一个检验以决定该使用哪个索引（如果有的话），并且使用这个索引来从表里取得记录。这个过程不会很快，但总比没有任何索引时做表连接来得快。<br>Scanned N databases<br>Select tables optimized away<br>Skip_open_table, Open_frm_only, Open_trigger_only, Open_full_table<br>Start materialize, End materialize, Scan<br>Start temporary, End temporary<br>unique row not found<br>类似于SELECT … FROM tbl_name这样的查询，该表上没有满足条件的唯一索引或者主键的行。（不好翻译，具体看官档吧）</p>
+<p>Using filesort<br>mysql需要额外的做一遍从而以排好的顺序取得记录。排序程序根据连接的类型遍历所有的记录，并且将所有符合 where条件的记录的要排序的键和指向记录的指针存储起来。这些键已经排完序了，对应的记录也会按照排好的顺序取出来。See Section 8.2.1.15, “ORDER BY Optimization”.</p>
+<p>Using index<br>字段的信息直接从索引树中的信息取得，而不再去扫描实际的记录。这种策略用于查询时的字段是一个独立索引的一部分。<br>如果extra列中同时还有using where，意思是这个索引时用来查找键值，然后回表。<br>如果没有using where，优化器可能是为了避免回表。<br>例如，如果索引时覆盖索引，优化器扫描索引，而不是用索引来回表。<br>对于有聚集索引的innodb表，即使extra列中没有using index，也可以使用索引。这适用于type列是index，key列是primary的情况。</p>
+<p>Using index condition<br>ICP优化相关，将数据过滤条件从server层面下推到存储引擎层，在存储引擎层根据索引元祖过滤数据，避免不符合条件的数据传给server。（非翻译，整理自网络。）<br>Using index for group-by<br>与using index类似，using index for group-by表明mysql找到一个索引，该索引可以返回所有group-by或distinct查询所需的列，不需要回表。<br>Using join buffer (Block Nested Loop), Using join buffer (Batched Key Access)<br>做连接时，当前表之前的表被分多次读入join buffer中，然后join buffer中的表再跟当前表做join。(Block Nested Loop) 表明使用BNL算法。 (Batched Key Access)表明使用BKA算法。explain中，上一行的keys会被读入buffer，然后当前表的相应的行会被分批获取。（具体什么意思，再查！）<br>Using MRR<br>MRR优化方式，具体再查。<br>Using sort_union(…), Using union(…), Using intersect(…)<br>Using temporary<br>mysql需要创建临时表存储结果以完成查询。这种情况通常发生在查询时包含了groupby 和 order by 子句，它以不同的方式列出了各个字段。<br>Using where<br>过滤符合条件的行。<br>当extra列中没有using where并且表连接类型为all或者index时，你可能执行了错误的查询，除非你要获取或检查所有的行。<br>Using where with pushed condition<br>仅适用于NDB。从各个节点过滤数据。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="李云飞 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="李云飞 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/31/java并发工具类/" rel="next" title="java并发工具类">
+                <i class="fa fa-chevron-left"></i> java并发工具类
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/18/数据结构与算法/" rel="prev" title="数据结构与算法-排序">
+                数据结构与算法-排序 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/touxiang.jpg"
+                alt="李云飞" />
+            
+              <p class="site-author-name" itemprop="name">李云飞</p>
+              <p class="site-description motion-element" itemprop="description">it相关的学习笔记</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yungegege" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5482253251/home" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-globe"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/wo-shi-ni-yun-ge-90/activities" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.liaoxuefeng.com/" title="Title" target="_blank">Title</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql高性能优化"><span class="nav-number">1.</span> <span class="nav-text">mysql高性能优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#表的优化"><span class="nav-number">1.1.</span> <span class="nav-text">表的优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列类型的选择原则"><span class="nav-number">1.2.</span> <span class="nav-text">列类型的选择原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引优化"><span class="nav-number">1.3.</span> <span class="nav-text">索引优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#btree索引"><span class="nav-number">1.3.1.</span> <span class="nav-text">btree索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hash索引"><span class="nav-number">1.3.2.</span> <span class="nav-text">hash索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚簇索引"><span class="nav-number">1.3.3.</span> <span class="nav-text">聚簇索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非聚簇索引"><span class="nav-number">1.3.4.</span> <span class="nav-text">非聚簇索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引覆盖"><span class="nav-number">1.3.5.</span> <span class="nav-text">索引覆盖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引与排序"><span class="nav-number">1.3.6.</span> <span class="nav-text">索引与排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重复索引与冗余索引"><span class="nav-number">1.3.7.</span> <span class="nav-text">重复索引与冗余索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引碎片与维护"><span class="nav-number">1.3.8.</span> <span class="nav-text">索引碎片与维护</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sql语句优化"><span class="nav-number">1.4.</span> <span class="nav-text">sql语句优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#limit优化"><span class="nav-number">1.5.</span> <span class="nav-text">limit优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#强制使用索引"><span class="nav-number">1.6.</span> <span class="nav-text">强制使用索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#in型子查询"><span class="nav-number">1.7.</span> <span class="nav-text">in型子查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#count与union"><span class="nav-number">1.8.</span> <span class="nav-text">count与union</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#explain各字段解析"><span class="nav-number">1.9.</span> <span class="nav-text">explain各字段解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#id"><span class="nav-number">1.9.1.</span> <span class="nav-text">id</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#select-type"><span class="nav-number">1.9.2.</span> <span class="nav-text">select_type</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#table"><span class="nav-number">1.9.3.</span> <span class="nav-text">table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#type"><span class="nav-number">1.9.4.</span> <span class="nav-text">type</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ref：可以理解为非唯一性索引扫描。从索引中将对应值的行取出来，跟之前表中取出的数据做连接。如果只使用了索引的左前缀，或者非主键非唯一索引做链接时，用ref。（换句话说，对于给定的值，返回的行数不止一行。）如果给定的值只返回很少的行，这是个很好的连接方式。"><span class="nav-number">1.9.5.</span> <span class="nav-text">ref：可以理解为非唯一性索引扫描。从索引中将对应值的行取出来，跟之前表中取出的数据做连接。如果只使用了索引的左前缀，或者非主键非唯一索引做链接时，用ref。（换句话说，对于给定的值，返回的行数不止一行。）如果给定的值只返回很少的行，这是个很好的连接方式。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#possible-keys"><span class="nav-number">1.9.6.</span> <span class="nav-text">possible_keys</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#key"><span class="nav-number">1.9.7.</span> <span class="nav-text">key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#key-len"><span class="nav-number">1.9.8.</span> <span class="nav-text">key_len</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ref"><span class="nav-number">1.9.9.</span> <span class="nav-text">ref</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rows"><span class="nav-number">1.9.10.</span> <span class="nav-text">rows</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Extra"><span class="nav-number">1.9.11.</span> <span class="nav-text">Extra</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李云飞</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=65635224";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://cloud.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/03/14/Mysql高性能优化/';
+          this.page.identifier = '2018/03/14/Mysql高性能优化/';
+          this.page.title = 'Mysql高性能优化';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://cloud.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
