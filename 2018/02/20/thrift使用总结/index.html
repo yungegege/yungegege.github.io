@@ -126,11 +126,11 @@
 <meta name="description" content="假设有两台服务器A,B.A服务器上部署着一个应用a,B服务器上部署着一个应用b,现在a希望能够调用b应用的某个函数(方法),但是二者不在同一个进程内,不能直接调用,就需要通过网络传输,在AB服务器之间建一条网络传输通道,a把参数传过去,b接收到参数调用自己的方法,得到结果,再通过网络传回给a,简单讲就是A通过网络来调用B的过程.这个过程要涉及的东西很多,比如多线程,Socket,序列化反序列化,网">
 <meta property="og:type" content="article">
 <meta property="og:title" content="thrift使用总结">
-<meta property="og:url" content="http://yoursite.com/2018/06/20/thrift使用总结/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/02/20/thrift使用总结/index.html">
 <meta property="og:site_name" content="李云飞的个人博客">
 <meta property="og:description" content="假设有两台服务器A,B.A服务器上部署着一个应用a,B服务器上部署着一个应用b,现在a希望能够调用b应用的某个函数(方法),但是二者不在同一个进程内,不能直接调用,就需要通过网络传输,在AB服务器之间建一条网络传输通道,a把参数传过去,b接收到参数调用自己的方法,得到结果,再通过网络传回给a,简单讲就是A通过网络来调用B的过程.这个过程要涉及的东西很多,比如多线程,Socket,序列化反序列化,网">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-02T15:07:35.102Z">
+<meta property="og:updated_time" content="2018-09-18T06:05:23.122Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="thrift使用总结">
 <meta name="twitter:description" content="假设有两台服务器A,B.A服务器上部署着一个应用a,B服务器上部署着一个应用b,现在a希望能够调用b应用的某个函数(方法),但是二者不在同一个进程内,不能直接调用,就需要通过网络传输,在AB服务器之间建一条网络传输通道,a把参数传过去,b接收到参数调用自己的方法,得到结果,再通过网络传回给a,简单讲就是A通过网络来调用B的过程.这个过程要涉及的东西很多,比如多线程,Socket,序列化反序列化,网">
@@ -163,7 +163,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/20/thrift使用总结/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/02/20/thrift使用总结/"/>
 
 
 
@@ -346,7 +346,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/20/thrift使用总结/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/20/thrift使用总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李云飞">
@@ -375,8 +375,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-20T10:45:41+08:00">
-                2018-06-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-20T10:45:41+08:00">
+                2018-02-20
               </time>
             
 
@@ -394,9 +394,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/06/20/thrift使用总结/#comments" itemprop="discussionUrl">
+                <a href="/2018/02/20/thrift使用总结/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/06/20/thrift使用总结/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/02/20/thrift使用总结/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -478,8 +478,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/12/springboot学习之路/" rel="next" title="springboot学习之路">
-                <i class="fa fa-chevron-left"></i> springboot学习之路
+              <a href="/2018/02/02/Mysql事务与锁机制/" rel="next" title="Mysql事务与锁机制">
+                <i class="fa fa-chevron-left"></i> Mysql事务与锁机制
               </a>
             
           </div>
@@ -488,8 +488,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/09/03/单点登录/" rel="prev" title="单点登录">
-                单点登录 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/14/Mysql高性能优化/" rel="prev" title="Mysql高性能优化">
+                Mysql高性能优化 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -572,7 +572,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-count">58</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -824,8 +824,8 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/06/20/thrift使用总结/';
-          this.page.identifier = '2018/06/20/thrift使用总结/';
+          this.page.url = 'http://yoursite.com/2018/02/20/thrift使用总结/';
+          this.page.identifier = '2018/02/20/thrift使用总结/';
           this.page.title = 'thrift使用总结';
         };
         var d = document, s = d.createElement('script');
