@@ -123,17 +123,17 @@
 
 
 
-<meta name="description" content="一、主从通过持久化功能，Redis保证了即使在服务器重启的情况下也不会损失（或少量损失）数据，因为持久化会把内存中数据保存到硬盘上，重启会从硬盘上加载数据。。但是由于数据是存储在一台服务器上的，如果这台服务器出现硬盘故障等问题，也会导致数据丢失。为了避免单点故障，通常的做法是将数据库复制多个副本以部署在不同的服务器上，这样即使有一台服务器出现故障，其他服务器依然可以继续提供服务。为此， Redis">
+<meta name="description" content="redis集群主要有三种方式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="redis集群搭建">
 <meta property="og:url" content="http://yoursite.com/2018/08/18/redis集群搭建/index.html">
 <meta property="og:site_name" content="李云飞的个人博客">
-<meta property="og:description" content="一、主从通过持久化功能，Redis保证了即使在服务器重启的情况下也不会损失（或少量损失）数据，因为持久化会把内存中数据保存到硬盘上，重启会从硬盘上加载数据。。但是由于数据是存储在一台服务器上的，如果这台服务器出现硬盘故障等问题，也会导致数据丢失。为了避免单点故障，通常的做法是将数据库复制多个副本以部署在不同的服务器上，这样即使有一台服务器出现故障，其他服务器依然可以继续提供服务。为此， Redis">
+<meta property="og:description" content="redis集群主要有三种方式">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-18T06:27:34.048Z">
+<meta property="og:updated_time" content="2018-09-19T16:19:30.485Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis集群搭建">
-<meta name="twitter:description" content="一、主从通过持久化功能，Redis保证了即使在服务器重启的情况下也不会损失（或少量损失）数据，因为持久化会把内存中数据保存到硬盘上，重启会从硬盘上加载数据。。但是由于数据是存储在一台服务器上的，如果这台服务器出现硬盘故障等问题，也会导致数据丢失。为了避免单点故障，通常的做法是将数据库复制多个副本以部署在不同的服务器上，这样即使有一台服务器出现故障，其他服务器依然可以继续提供服务。为此， Redis">
+<meta name="twitter:description" content="redis集群主要有三种方式">
 
 
 
@@ -424,7 +424,8 @@
       
 
       
-        <h1 id="一、主从"><a href="#一、主从" class="headerlink" title="一、主从"></a>一、主从</h1><p>通过持久化功能，Redis保证了即使在服务器重启的情况下也不会损失（或少量损失）数据，因为持久化会把内存中数据保存到硬盘上，重启会从硬盘上加载数据。<br>。但是由于数据是存储在一台服务器上的，如果这台服务器出现硬盘故障等问题，也会导致数据丢失。为了避免单点故障，通常的做法是将数据库复制多个副本以部署在不同的服务器上，这样即使有一台服务器出现故障，其他服务器依然可以继续提供服务。为此， Redis 提供了复制（replication）功能，可以实现当一台数据库中的数据更新后，自动将更新的数据同步到其他数据库上。</p>
+        <p>redis集群主要有三种方式<br><a id="more"></a></p>
+<h1 id="一、主从"><a href="#一、主从" class="headerlink" title="一、主从"></a>一、主从</h1><p>通过持久化功能，Redis保证了即使在服务器重启的情况下也不会损失（或少量损失）数据，因为持久化会把内存中数据保存到硬盘上，重启会从硬盘上加载数据。<br>。但是由于数据是存储在一台服务器上的，如果这台服务器出现硬盘故障等问题，也会导致数据丢失。为了避免单点故障，通常的做法是将数据库复制多个副本以部署在不同的服务器上，这样即使有一台服务器出现故障，其他服务器依然可以继续提供服务。为此， Redis 提供了复制（replication）功能，可以实现当一台数据库中的数据更新后，自动将更新的数据同步到其他数据库上。</p>
 <p>在复制的概念中，数据库分为两类，一类是主数据库（master），另一类是从数据库[1] （slave）。主数据库可以进行读写操作，当写操作导致数据变化时会自动将数据同步给从数据库。而从数据库一般是只读的，并接受主数据库同步过来的数据。一个主数据库可以拥有多个从数据库，而一个从数据库只能拥有一个主数据库。</p>
 <h2 id="主从数据库的配置"><a href="#主从数据库的配置" class="headerlink" title="主从数据库的配置"></a>主从数据库的配置</h2><p>master  slave<br>主不用配置，从redis的conf文件加入 slaveof ip port 就可以了<br>或者从redis启动时  redis-server –port 6380 –slaveof 127.0.0.1 6379<br>    从数据库一般是只读，可以改为可写，但写入的数据很容易被主同步没，所以还是只读就可以。<br>也可以在运行是使用slaveof ip port命令，停止原来的主，切换成刚刚设置的主  slaveof no one会把自己变成主</p>
 <h2 id="复制原理"><a href="#复制原理" class="headerlink" title="复制原理"></a>复制原理</h2><p>当从数据库启动时，会向主数据库发送sync命令，主数据库接收到sync后开始在后台报错快照rdb，在保存快照期间受到的命名缓存起来，当快照完成时，主数据库会将快照和缓存的命令一块发送给从。复制初始化结束。<br>之后，主每受到1个命令就同步发送给从。<br>当出现断开重连后，2.8之后的版本会将断线期间的命令传给重数据库。增量复制</p>
@@ -520,8 +521,8 @@ cluster-config-file nodes-6382.conf --集群配置文件名，每个实例配置
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/12/springboot学习总结/" rel="next" title="springboot学习总结">
-                <i class="fa fa-chevron-left"></i> springboot学习总结
+              <a href="/2018/06/27/ThreadLocal类原理/" rel="next" title="ThreadLocal类原理">
+                <i class="fa fa-chevron-left"></i> ThreadLocal类原理
               </a>
             
           </div>
