@@ -130,7 +130,7 @@
 <meta property="og:site_name" content="李云飞的个人博客">
 <meta property="og:description" content="算法还需要理解并书写以下代码：kmpdp全排列最长递增子序列、最长公共子序列排序top n并查集归并排序的非递归算法,不要借助栈基于ZooKeeper的服务注册中心 杂物springmvc和springboot的区别一致性哈希单点登录StampedLockReentrantLockaqsfork/joinConcurrentHashmapReentrantReadWriteLock ip 分类IP">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-19T16:09:47.348Z">
+<meta property="og:updated_time" content="2018-09-19T16:16:45.037Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="零碎知识">
 <meta name="twitter:description" content="算法还需要理解并书写以下代码：kmpdp全排列最长递增子序列、最长公共子序列排序top n并查集归并排序的非递归算法,不要借助栈基于ZooKeeper的服务注册中心 杂物springmvc和springboot的区别一致性哈希单点登录StampedLockReentrantLockaqsfork/joinConcurrentHashmapReentrantReadWriteLock ip 分类IP">
@@ -461,7 +461,8 @@
 <li>加权随机法跟加权轮询法类似，根据后台服务器不同的配置和负载情况配置不同的权重。不同的是，它是按照权重来随机选取服务器的而非顺序。</li>
 <li>前面我们费尽心思来实现服务消费者请求次数分配的均衡，我们知道这样做是没错的，可以为后端的多台服务器平均分配工作量，最大程度地提高服务器的利用率，但是，实际上，请求次数的均衡并不代表负载的均衡。因此我们需要介绍最小连接数法，最小连接数法比较灵活和智能，由于后台服务器的配置不尽相同，对请求的处理有快有慢，它正是根据后端服务器当前的连接情况，动态的选取其中当前积压连接数最少的一台服务器来处理当前请求，尽可能的提高后台服务器利用率，将负载合理的分流到每一台服务器。</li>
 </ol>
-<h2 id="cms和g1"><a href="#cms和g1" class="headerlink" title="cms和g1"></a>cms和g1</h2><p>cms：位于老年代<br>四个步骤：初始标记、并发标记、重新标记、并发清楚<br>优点：<br>缺点：cpu敏感、无法清除浮动垃圾、收集结束会有大量碎片</p>
+<h2 id="cms和g1"><a href="#cms和g1" class="headerlink" title="cms和g1"></a>cms和g1</h2><p>cms：位于老年代，可以与<br>四个步骤：初始标记、并发标记、重新标记、并发清楚<br>优点：并发收集，低停顿。<br>缺点：cpu敏感、无法清除浮动垃圾、收集结束会有大量碎片</p>
+<p>g1: 可以独立管理gc堆</p>
 <h2 id="CAP"><a href="#CAP" class="headerlink" title="CAP"></a>CAP</h2><p>Consistency 中文叫做”一致性”。意思是，写操作之后的读操作，必须返回该值。<br>Availability 中文叫做”可用性”，意思是只要收到用户的请求，服务器就必须给出回应。<br>Partition tolerance，中文叫做”分区容错”，意思是，区间通信可能失败。</p>
 <h2 id="一致性哈希"><a href="#一致性哈希" class="headerlink" title="一致性哈希"></a>一致性哈希</h2><ol>
 <li>将整个哈希值空间组织成一个虚拟的圆环，如假设某哈希函数H的值空间为0 - (2^32)-1</li>

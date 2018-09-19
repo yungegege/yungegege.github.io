@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="李云飞的个人博客">
 <meta property="og:description" content="垃圾收集算法和垃圾收集器">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-14T02:47:41.723Z">
+<meta property="og:updated_time" content="2018-09-19T16:17:17.715Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="垃圾收集器与内存分配策略">
 <meta name="twitter:description" content="垃圾收集算法和垃圾收集器">
@@ -461,7 +461,7 @@
 <li>parallel scavenge：新生代，复制算法，多线程执行；<br> 关注点与其他收集器不同，CMS等收集器关注点是尽可能缩短垃圾收集时用户线程的停顿时间，而本收集器目标是达到一个可控制的吞吐量(运行用户代码时间/(运行用户代码时间+垃圾收集时间))，如虚拟机共运行100分钟，垃圾收集花费一分钟，吞吐量就是99%。因此本收集器也被成为吞吐量优先收集器。</li>
 <li>serial old：老年代，标记-整理算法，单线程执行；<br> 是serial收集器的老年代版本主要给Client模式的虚拟机使用，如果在Server模式，还有两大用途：1.jdk1.5及之前与Parallel Scavenge收集器搭配使用; 2.作为CMS收集器的后背预案，在并发收集发生Concurrent Mode Failure时使用。</li>
 <li>parallel old： 老年代，标记-整理算法，多线程执行；<br> 是parallel scavenge收集器的老年代版本，在注重吞吐量和CPU资源敏感的场合，可以优先考虑使用parallel scavenge和parallel old收集器。</li>
-<li>cms：老年代，标记-清楚算法，多线程执行；<br> 以获取最短回收停顿时间为目标，运作过程分为以下四个步骤：1. 初始标记； 2. 并发标记； 3. 重新标记； 4. 并发清除。<br> 其中1、3两个步骤需要暂停工作线程，1仅仅标记GC Roots能直接关联的对象，速度很快。2阶段是进行GC Roots Tracing的过程，3为了修正并发标记期间因用户程序继续运作导致标记产生变动的那一部分对象的标记记录，这个阶段的停顿时间一般比1阶段稍长，但远比2阶段短。<br> 由于整个过程最长的并发标记和并发清楚过程收集器线程都可以与用户一起工作，所以总体上来说，CMS收集器的·内存回收过程与用户线程并发执行。</li>
+<li>cms：老年代，标记-清楚算法，多线程执行；可以与serial或parnew一起使用<br> 以获取最短回收停顿时间为目标，运作过程分为以下四个步骤：1. 初始标记； 2. 并发标记； 3. 重新标记； 4. 并发清除。<br> 其中1、3两个步骤需要暂停工作线程，1仅仅标记GC Roots能直接关联的对象，速度很快。2阶段是进行GC Roots Tracing的过程，3为了修正并发标记期间因用户程序继续运作导致标记产生变动的那一部分对象的标记记录，这个阶段的停顿时间一般比1阶段稍长，但远比2阶段短。<br> 由于整个过程最长的并发标记和并发清楚过程收集器线程都可以与用户一起工作，所以总体上来说，CMS收集器的·内存回收过程与用户线程并发执行。</li>
 <li>g1：可以独立管理GC堆，整体来看标记-整理，局部来看是复制算法。<br> 运作过程分为以下四个步骤：1. 初始标记； 2. 并发标记； 3. 最终标记； 4. 筛选回收。</li>
 </ol>
 <h2 id="gc日志"><a href="#gc日志" class="headerlink" title="gc日志"></a>gc日志</h2><h2 id="垃圾收集器参数总结"><a href="#垃圾收集器参数总结" class="headerlink" title="垃圾收集器参数总结"></a>垃圾收集器参数总结</h2><h1 id="内存分配与回收策略"><a href="#内存分配与回收策略" class="headerlink" title="内存分配与回收策略"></a>内存分配与回收策略</h1><p>对象的内存分配就是在堆上分配，对象主要分配在新生代的Eden区上，少数情况下直接分配到老年代中，分配的规则不固定，取决于垃圾收集器组合和与内存相关的参数的设置。<br>-XX:+PrintGCDetails 这个参数告诉虚拟机在发生垃圾收集行为时打印内存回收日志，并且在进程退出时候输出当前的内存各区域分配情况。</p>
