@@ -346,6 +346,136 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/16/java内存模型与线程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李云飞">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李云飞的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/16/java内存模型与线程/" itemprop="url">java内存模型与线程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-16T18:27:40+08:00">
+                2017-11-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/16/java内存模型与线程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/16/java内存模型与线程/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/15/java内存区域划分/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1510,35 +1640,20 @@
       
         
           
-            <h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><p>还需要理解并书写以下代码：<br>kmp<br>dp全排列<br>最长递增子序列、最长公共子序列<br>排序<br>top n<br>并查集<br>归并排序的非递归算法,不要借助栈<br>基于ZooKeeper的服务注册中心</p>
-<h1 id="杂物"><a href="#杂物" class="headerlink" title="杂物"></a>杂物</h1><p>springmvc和springboot的区别<br>一致性哈希<br>单点登录<br>StampedLock<br>ReentrantLock<br>aqs<br>fork/join<br>ConcurrentHashmap<br>ReentrantReadWriteLock</p>
-<h2 id="ip"><a href="#ip" class="headerlink" title="ip"></a>ip</h2><ol>
-<li>分类<br>IP 地址 ::= {&lt; 网络号 &gt;, &lt; 主机号 &gt;}<br>ip地址共32位<br>地址类型  网络号位数           主机号位数<br>A           8 (0开头)           24<br>B           16 (10开头)         16<br>C           24 (110开头)        8<br>D           32 (1110开头)       0<br>E           32 (1111开头)       0</li>
-<li>子网划分<br>通过在主机号字段中拿一部分作为子网号，把两级 IP 地址划分为三级 IP 地址。</li>
-</ol>
-<p>IP 地址 ::= {&lt; 网络号 &gt;, &lt; 子网号 &gt;, &lt; 主机号 &gt;}</p>
-<p>要使用子网，必须配置子网掩码。一个 B 类地址的默认子网掩码为 255.255.0.0，如果 B 类地址的子网占两个比特，那么子网掩码为 11111111 11111111 11000000 00000000，也就是 255.255.192.0。</p>
-<p>注意，外部网络看不到子网的存在。</p>
-<h2 id="tcp"><a href="#tcp" class="headerlink" title="tcp"></a>tcp</h2><ol>
-<li><p>三次握手</p>
+            <h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><p>还需要理解并书写以下代码：<br>kmp<br>dp全排列<br>最长递增子序列、最长公共子序列<br>排序<br>top n<br>并查集<br>归并排序的非递归算法,不要借助栈</p>
+<h1 id="零碎知识"><a href="#零碎知识" class="headerlink" title="零碎知识"></a>零碎知识</h1><h2 id="sync和volitale"><a href="#sync和volitale" class="headerlink" title="sync和volitale"></a>sync和volitale</h2><p>每个对象有一个监视器锁（monitor）。当monitor被占用时就会处于锁定状态，</p>
+<ol>
+<li><p>线程执行monitorenter指令时尝试获取monitor的所有权，过程如下：<br>如果monitor的进入数为0，则该线程进入monitor，然后将进入数设置为1，该线程即为monitor的所有者。<br>如果线程已经占有该monitor，只是重新进入，则进入monitor的进入数加1.<br>如果其他线程已经占用了monitor，则该线程进入阻塞状态，直到monitor的进入数为0，再重新尝试获取monitor的所有权。</p>
 </li>
-<li><p>四次挥手</p>
-</li>
-<li><p>可靠传输<br>TCP 使用超时重传来实现可靠传输：如果一个已经发送的报文段在超时时间内没有收到确认，那么就重传这个报文段。<br>一个报文段从发送再到接收到确认所经过的时间称为往返时间 RTT，加权平均往返时间 RTTs 计算如下：<br>超时时间 RTO 应该略大于 RTTs，TCP 使用的超时时间计算如下：<br>其中 RTTd 为偏差。</p>
-</li>
-<li><p>滑动窗口<br>窗口是缓存的一部分，用来暂时存放字节流。发送方和接收方各有一个窗口，接收方通过 TCP 报文段中的窗口字段告诉发送方自己的窗口大小，发送方根据这个值和其它信息设置自己的窗口大小。<br>发送窗口内的字节都允许被发送，接收窗口内的字节都允许被接收。如果发送窗口左部的字节已经发送并且收到了确认，那么就将发送窗口向右滑动一定距离，直到左部第一个字节不是已发送并且已确认的状态；接收窗口的滑动类似，接收窗口左部字节已经发送确认并交付主机，就向右滑动接收窗口。<br>接收窗口只会对窗口内最后一个按序到达的字节进行确认，例如接收窗口已经收到的字节为 {31, 34, 35}，其中 {31} 按序到达，而 {34, 35} 就不是，因此只对字节 31 进行确认。发送方得到一个字节的确认之后，就知道这个字节之前的所有字节都已经被接收。</p>
-</li>
-<li><p>流量控制<br>流量控制是为了控制发送方发送速率，保证接收方来得及接收。<br>接收方发送的确认报文中的窗口字段可以用来控制发送方窗口大小，从而影响发送方的发送速率。将窗口字段设置为 0，则发送方不能发送数据。</p>
-</li>
-<li><p>拥塞控制<br>如果网络出现拥塞，分组将会丢失，此时发送方会继续重传，从而导致网络拥塞程度更高。因此当出现拥塞时，应当控制发送方的速率。这一点和流量控制很像，但是出发点不同。流量控制是为了让接收方能来得及接收，而拥塞控制是为了降低整个网络的拥塞程度。</p>
+<li><p>当线程执行monitorexit指令时候，过程如下：<br>执行monitorexit的线程必须是objectref所对应的monitor的所有者。</p>
 </li>
 </ol>
-<p>TCP 主要通过四个算法来进行拥塞控制：慢开始、拥塞避免、快重传、快恢复。</p>
-<h2 id="http和https"><a href="#http和https" class="headerlink" title="http和https"></a>http和https</h2><p>HTTPS和HTTP的区别主要如下：</p>
-<p>　　1、https协议需要到ca申请证书，一般免费证书较少，因而需要一定费用。</p>
-<p>　　2、http是超文本传输协议，信息是明文传输，https则是具有安全性的ssl加密传输协议。</p>
-<p>　　3、http和https使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443。</p>
-<p>　　4、http的连接很简单，是无状态的；HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，比http协议安全。</p>
+<p>指令执行时，monitor的进入数减1，如果减1后进入数为0，那线程退出monitor，不再是这个monitor的所有者。其他被这个monitor阻塞的线程可以尝试去获取这个 monitor 的所有权。</p>
+<h2 id="hashmap扩容"><a href="#hashmap扩容" class="headerlink" title="hashmap扩容"></a>hashmap扩容</h2><p>首先要了解HashMap的扩容过程，我们就得了解一些HashMap中的变量：<br>Node&lt;K,V&gt;：链表节点，包含了key、value、hash、next指针四个元素<br>table：Node&lt;K,V&gt;类型的数组，里面的元素是链表，用于存放HashMap元素的实体<br>size：记录了放入HashMap的元素个数<br>loadFactor：负载因子<br>threshold：阈值，决定了HashMap何时扩容，以及扩容后的大小，一般等于table大小乘以loadFactor</p>
+<p>使用一个容量更大的数组来代替已有的容量小的数组，transfer()方法将原有Entry数组的元素拷贝到新的Entry数组里</p>
+<h2 id="操作系统分页"><a href="#操作系统分页" class="headerlink" title="操作系统分页"></a>操作系统分页</h2><p>在系统中通常设置一个页表寄存器(PTR)，存放页表在内存的始址F和页表长度M。进程未执行时，页表的始址和长度存放在进程控制块中，当进程执行时，才将页表始址和长度存入页表寄存器。设页面大小为L，逻辑地址A到物理地址E的变换过程如下：<br>计算页号P(P=A/L)和页内偏移量W (W=A%L)。<br>比较页号P和页表长度M，若P &gt;= M，则产生越界中断，否则继续执行。<br>页表中页号P对应的页表项地址 = 页表起始地址F + 页号P * 页表项长度，取出该页表项内容b，即为物理块号。<br>计算E=b*L+W，用得到的物理地址E去访问内存。</p>
+<p>以上整个地址变换过程均是由硬件自动完成的。</p>
+<p>例如，若页面大小L为1K字节，页号2对应的物理块为b=8，计算逻辑地址A=2500 的物理地址E的过程如下：P=2500/1K=2，W=2500%1K=452，查找得到页号2对应的物理块的块号为 8，E=8*1024+452=8644。</p>
 <h2 id="负载均衡算法"><a href="#负载均衡算法" class="headerlink" title="负载均衡算法"></a>负载均衡算法</h2><ol>
 <li>轮询法：轮询很容易实现，将请求按顺序轮流分配到后台服务器上，均衡的对待每一台服务器，而不关心服务器实际的连接数和当前的系统负载。</li>
 <li>随机法：通过系统随机函数，根据后台服务器列表的大小值来随机选取其中一台进行访问。由概率概率统计理论可以得知，随着调用量的增大，其实际效果越来越接近于平均分配流量到后台的每一台服务器，也就是轮询法的效果。</li>
@@ -1563,7 +1678,6 @@
 <h2 id="进程线程"><a href="#进程线程" class="headerlink" title="进程线程"></a>进程线程</h2><p>进程间通信方式：管道，信号，消息队列，共享内存，套接字</p>
 <h2 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a>类加载过程</h2><p>加载、验证、准备、解析、初始化、使用、卸载</p>
 <h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><p>(1)互斥条件：<br>即在一段时间内，某资源只能被一个线程所占用，若此时其它线程申请则必须等待，直至当前线程用完释放；<br>(2)请求和保持条件：<br>线程已拥有一个资源，此时它又申请新的资源，若新资源被其它线程占用，当前线程则会阻塞等待，但其会保持不放自己获得的资源；<br>(3)不可抢占条件：<br>线程在已获得的资源未使用完之前不能被抢占，只能自己使用完后自己释放；<br>(4)循环等待条件：</p>
-<h2 id="osi七层模型"><a href="#osi七层模型" class="headerlink" title="osi七层模型"></a>osi七层模型</h2><p>七层：物理层、数据链路层、网络层、传输层、会话层、表示层、应用层<br>四层：数据链路层、网络层、传输层、应用层</p>
 <h2 id="springmvc流程"><a href="#springmvc流程" class="headerlink" title="springmvc流程"></a>springmvc流程</h2><p>SpringMVC核心处理流程：<br>1、DispatcherServlet前端控制器接收发过来的请求，交给HandlerMapping处理器映射器<br>2、HandlerMapping处理器映射器，根据请求路径找到相应的HandlerAdapter处理器适配器（处理器适配器就是那些拦截器或Controller）<br>3、HandlerAdapter处理器适配器，处理一些功能请求，返回一个ModelAndView对象（包括模型数据、逻辑视图名）<br>4、ViewResolver视图解析器，先根据ModelAndView中设置的View解析具体视图<br>5、然后再将Model模型中的数据渲染到View上</p>
 <h2 id="jdk动态代理与cglib"><a href="#jdk动态代理与cglib" class="headerlink" title="jdk动态代理与cglib"></a>jdk动态代理与cglib</h2><p>jdk：implements InvocationHandler接口 重写 这个方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span>  </span></span><br><span class="line"><span class="function">            <span class="keyword">throws</span> Throwable </span>&#123;  </span><br><span class="line">    Object result=<span class="keyword">null</span>;  </span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">"预处理操作——————"</span>);  </span><br><span class="line">    <span class="comment">//调用真正的业务方法  </span></span><br><span class="line">    result=method.invoke(target, args);  </span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">"调用后处理——————"</span>);  </span><br><span class="line">    <span class="keyword">return</span> result;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>cglib：implements MethodInterceptor接口 重写 这个方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">intercept</span><span class="params">(Object obj, Method method, Object[] args,  </span></span></span><br><span class="line"><span class="function"><span class="params">            MethodProxy proxy)</span> <span class="keyword">throws</span> Throwable </span>&#123;  </span><br><span class="line">    System.out.println(<span class="string">"事物开始"</span>);  </span><br><span class="line">    proxy.invokeSuper(obj, args);  </span><br><span class="line">    System.out.println(<span class="string">"事物结束"</span>);  </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -1590,143 +1704,9 @@
 <li>可重复读：同一个事务中多次读取相同的数据返回的结果是一样的。其避免了脏读和不可重复读问题，但幻读依然存在。</li>
 <li>串行化：事务串行执行。避免了以上所有问题。</li>
 </ol>
-
+<h1 id="杂物"><a href="#杂物" class="headerlink" title="杂物"></a>杂物</h1><p>思维导图<br>nginx和zookeeper<br>springmvc和springboot的区别<br>一致性哈希<br>单点登录<br>StampedLock<br>ReentrantLock<br>aqs<br>fork/join<br>ConcurrentHashmap<br>ReentrantReadWriteLock<br>g.cn<br>tcp/ip筛选<br>策略和开放端口<br>加密算法和加密秘钥<br>des算法数据加密标准<br>dns解析过程<br>家里路由器提供dns解析吗<br>数据库连接池<br>端口复用技术<br>怎么设计淘宝评论标签分类的结构和功能?</p>
+<h2 id="间隙锁"><a href="#间隙锁" class="headerlink" title="间隙锁"></a>间隙锁</h2><h2 id="红黑树的理解"><a href="#红黑树的理解" class="headerlink" title="红黑树的理解"></a>红黑树的理解</h2><h2 id="缓存行和伪共享"><a href="#缓存行和伪共享" class="headerlink" title="缓存行和伪共享"></a>缓存行和伪共享</h2><h2 id="静态链接动态链接的区别"><a href="#静态链接动态链接的区别" class="headerlink" title="静态链接动态链接的区别"></a>静态链接动态链接的区别</h2><h2 id="如何解决分布式下的session一致性"><a href="#如何解决分布式下的session一致性" class="headerlink" title="如何解决分布式下的session一致性"></a>如何解决分布式下的session一致性</h2><h2 id="线程中断和阻塞"><a href="#线程中断和阻塞" class="headerlink" title="线程中断和阻塞"></a>线程中断和阻塞</h2><h2 id="数据库查询很慢你怎么解决"><a href="#数据库查询很慢你怎么解决" class="headerlink" title="数据库查询很慢你怎么解决"></a>数据库查询很慢你怎么解决</h2><h2 id="将数组分为两部分，使得这两部分和最接近，返回这两部分的差值"><a href="#将数组分为两部分，使得这两部分和最接近，返回这两部分的差值" class="headerlink" title="将数组分为两部分，使得这两部分和最接近，返回这两部分的差值"></a>将数组分为两部分，使得这两部分和最接近，返回这两部分的差值</h2><h2 id="基于ZooKeeper的服务注册中心"><a href="#基于ZooKeeper的服务注册中心" class="headerlink" title="基于ZooKeeper的服务注册中心"></a>基于ZooKeeper的服务注册中心</h2>
           
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/29/Python机器学习库-sklearn(2)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="李云飞">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/touxiang.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="李云飞的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/29/Python机器学习库-sklearn(2)/" itemprop="url">Python机器学习库-sklearn(2)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-29T13:26:16+08:00">
-                2017-08-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/08/29/Python机器学习库-sklearn(2)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/29/Python机器学习库-sklearn(2)/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>sklearn中的神经网络模块MLPClassifier</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/29/Python机器学习库-sklearn(2)/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -1814,7 +1794,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">58</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
